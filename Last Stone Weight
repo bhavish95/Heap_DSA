@@ -1,0 +1,28 @@
+import java.util.PriorityQueue;
+
+public class Solution { // Change the class name to "Solution"
+
+    public int lastStoneWeight(int[] stones) { // Match the method signature as per LeetCode
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        for (int stone : stones) {
+            maxHeap.add(stone);
+        }
+
+        while (maxHeap.size() > 1) {
+            int x1 = maxHeap.poll();
+            int x2 = maxHeap.poll();
+
+            int difference = x1 - x2;
+            maxHeap.add(difference);
+        }
+
+        return maxHeap.isEmpty() ? 0 : maxHeap.poll();
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {4, 2, 6, 4};
+        Solution solution = new Solution(); // Create an instance of the Solution class
+        int ans = solution.lastStoneWeight(arr);
+        System.out.println(ans);
+    }
+}
